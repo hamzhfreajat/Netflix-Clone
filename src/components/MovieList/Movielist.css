@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
+body{
+    font-family: 'Poppins' !important;
+}
+.main{
+    margin:120px 0 !important;
+}
+.card{
+    margin: 10px;
+}
+.card p {
+    height: 100px;
+    overflow: hidden;
+}
+.modal-input{
+    width: 100%;
+    border: 2px solid #E50914 ;
+    border-radius: 4px;
+    padding: 5px;
+}
+.modal-body{
+ text-align: center;   
+}
+.modal-body h3 ,.modal-body p{
+    margin: 20px 0;
+}
+.modal-bottom{
+    justify-content: center !important;
+}
