@@ -1,8 +1,23 @@
 import Modal from 'react-bootstrap/Modal';
 import {Button} from 'react-bootstrap';
-
+import axios from 'axios';
+import {useRef} from 'react';
 
 function Modale({cardInfo, show, handleClose}) {
+    const commentInputRef = useRef("");
+    const addToFav = async ()=>{
+        let comment = commentInputRef.current.value;
+        console.log(comment); 
+       let favorite = {title:cardInfo.title, movies_path:cardInfo.poster_path, overview:cardInfo.overview,comment:comment}
+      
+       await axios.post('https://hamzhapp.herokuapp.com/addMovie',favorite)
+                  .then(()=>{
+                      console.log("Complete :) ");
+                  }).catch((err)=>{
+                      console.log(err);
+                  });
+  
+   }
     return (
         <>
             <Modal show={show} onHide={handleClose} animation={false}>
@@ -15,11 +30,14 @@ function Modale({cardInfo, show, handleClose}) {
                     <div>
                         <p>{cardInfo.overview}</p>
                         <label htmlFor="op">Write Your Opinion :</label>
-                        <input placeholder="Write Your Opinion" type="text" id="op" className='modal-input' />
+                        <input placeholder="Write Your Opinion" ref={commentInputRef} type="text" id="op" className='modal-input' />
                     </div>
                 </Modal.Body>
                 <Modal.Footer className="modal-bottom">
-                    <Button variant="danger"> Add To Favorite </Button>
+                    <Button variant="danger" onClick={()=>{
+                        addToFav();
+                        handleClose();
+                    }}> Add To Favorite </Button>
                 </Modal.Footer>
             </Modal>
         </>
